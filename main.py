@@ -60,6 +60,7 @@ with mp_pose.Pose(
       cv2.circle(image, tuple(coords[31][:2]) , 6, (0,255,0), -1) # left foot index finger
       # x, y  = coords[32].ravel()
       # x1, y1  = coords[32].ravel()
+      # counting the steps 
       if right_z <-20 and l_true==True:
         counter_r +=1
         print('Right')
