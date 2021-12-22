@@ -72,7 +72,7 @@ with mp_pose.Pose(
         r_true=False
         l_true = True
       
-      cv2.putText(image, f"count_r: {counter_r} count_l: {counter_l}", (30,40), cv2.FONT_HERSHEY_PLAIN, 1.6, (0,255,0), 2,cv2.LINE_AA)
+      cv2.putText(image, f"count_r: {counter_r} count_l: {counter_l} total: {counter_r+counter_r}", (30,40), cv2.FONT_HERSHEY_PLAIN, 1.3, (0,255,0), 2,cv2.LINE_AA)
 
       
 
