@@ -37,10 +37,14 @@ with mp_pose.Pose(
     results.pose_landmarks,
     mp_pose.POSE_CONNECTIONS,
     landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
-
+    # print(mp_pose.PoseLandmark.LEFT_FOOT_INDEX.value)
     if results.pose_landmarks:
+      print(results.pose_landmarks.landmark[31])
       coords =np.array([np.multiply([p.x, p.y], [width, height]).astype(int) for p in results.pose_landmarks.landmark])
       # [print(c) for c in coords]
+      cv2.putText(image, 'Left', coords[31], cv2.FONT_HERSHEY_PLAIN, 1, (0,0,255), 2, cv2.LINE_AA)
+      cv2.putText(image, f'Right {round(results.pose_landmarks.landmark[31].z, 3)}', coords[32], cv2.FONT_HERSHEY_PLAIN, 1, (255,0,255), 2, cv2.LINE_AA)
+
       cv2.circle(image, tuple(coords[32]) , 6, (0,255,0), -1) # right foot index finger
       cv2.circle(image, tuple(coords[31]) , 6, (0,255,0), -1) # left foot index finger
       # x, y  = coords[32].ravel()
