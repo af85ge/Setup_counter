@@ -3,14 +3,15 @@ import mediapipe as mp
 import numpy as np
 import math
 
-from numpy.lib.type_check import imag
 counter_r = 0
 counter_l = 0
 r_true = True
 l_true = True
+
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
+
 # Euclaidean distance 
 def euclaideanDistance(point, point1):
     x, y = point.ravel()
@@ -18,10 +19,11 @@ def euclaideanDistance(point, point1):
     # print(x, x1)
     distance = math.sqrt((x1 - x)**2 + (y1 - y)**2)
     return distance
+
 cap = cv2.VideoCapture("walking1.mp4")
 with mp_pose.Pose(
-    min_detection_confidence=0.4,
-    min_tracking_confidence=0.4) as pose:
+    min_detection_confidence=0.6,
+    min_tracking_confidence=0.6) as pose:
   while cap.isOpened():
     success, image = cap.read()
     if not success:
@@ -72,11 +74,8 @@ with mp_pose.Pose(
         r_true=False
         l_true = True
       
-      cv2.putText(image, f"count_r: {counter_r} count_l: {counter_l} total: {counter_r+counter_r}", (30,40), cv2.FONT_HERSHEY_PLAIN, 1.3, (0,255,0), 2,cv2.LINE_AA)
+      cv2.putText(image, f"Steps: {counter_l+counter_r}", (30,40), cv2.FONT_HERSHEY_PLAIN, 1.3, (0,255,0), 2,cv2.LINE_AA)
 
-      
-
-      # print(x,y)
       distance_bt_feets =euclaideanDistance(coords[31][:2], coords[32][:2])
 
       # cv2.putText(image, f"Dsit: {round(distance_bt_feets,3)}", (30,40), cv2.FONT_HERSHEY_PLAIN, 1.6, (0,255,0), 2,cv2.LINE_AA)
