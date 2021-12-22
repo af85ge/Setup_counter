@@ -2,6 +2,8 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import math
+
+from numpy.lib.type_check import imag
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
@@ -46,7 +48,7 @@ with mp_pose.Pose(
       print(coords[31][:2])
       cv2.putText(image, f'left {round(coords[31][2], 2)}',coords[31][:2],  cv2.FONT_HERSHEY_PLAIN, 1, (0,0,255), 2, cv2.LINE_AA)
       cv2.putText(image,  f'Right {round(coords[32][2], 2)}', coords[32][:2], cv2.FONT_HERSHEY_PLAIN, 1, (255,0,255), 2, cv2.LINE_AA)
-
+      cv2.line(image, pt1=coords[31][:2], pt2=coords[32][:2], color=(255,255,0),thickness=2, lineType= cv2.LINE_AA)
       cv2.circle(image, tuple(coords[32][:2]) , 6, (0,255,0), -1) # right foot index finger
       cv2.circle(image, tuple(coords[31][:2]) , 6, (0,255,0), -1) # left foot index finger
       # x, y  = coords[32].ravel()
@@ -54,7 +56,7 @@ with mp_pose.Pose(
 
       # print(x,y)
       distance_bt_feets =euclaideanDistance(coords[31][:2], coords[32][:2])
-    
+
       # cv2.putText(image, f"Dsit: {round(distance_bt_feets,3)}", (30,40), cv2.FONT_HERSHEY_PLAIN, 1.6, (0,255,0), 2,cv2.LINE_AA)
       # print(distance_bt_feets)
       if distance_bt_feets<70:
