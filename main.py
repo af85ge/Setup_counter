@@ -42,8 +42,8 @@ with mp_pose.Pose(
       print(results.pose_landmarks.landmark[31])
       coords =np.array([np.multiply([p.x, p.y], [width, height]).astype(int) for p in results.pose_landmarks.landmark])
       # [print(c) for c in coords]
-      cv2.putText(image, 'Left', coords[31], cv2.FONT_HERSHEY_PLAIN, 1, (0,0,255), 2, cv2.LINE_AA)
-      cv2.putText(image, f'Right {round(results.pose_landmarks.landmark[31].z, 3)}', coords[32], cv2.FONT_HERSHEY_PLAIN, 1, (255,0,255), 2, cv2.LINE_AA)
+      cv2.putText(image, f'left {round(results.pose_landmarks.landmark[31].z, 3)}',coords[31],  cv2.FONT_HERSHEY_PLAIN, 1, (0,0,255), 2, cv2.LINE_AA)
+      cv2.putText(image, f'Right {round(results.pose_landmarks.landmark[32].z, 3)}', coords[32], cv2.FONT_HERSHEY_PLAIN, 1, (255,0,255), 2, cv2.LINE_AA)
 
       cv2.circle(image, tuple(coords[32]) , 6, (0,255,0), -1) # right foot index finger
       cv2.circle(image, tuple(coords[31]) , 6, (0,255,0), -1) # left foot index finger
