@@ -60,14 +60,16 @@ with mp_pose.Pose(
       cv2.circle(image, tuple(coords[31][:2]) , 6, (0,255,0), -1) # left foot index finger
       # x, y  = coords[32].ravel()
       # x1, y1  = coords[32].ravel()
-      if right_z <-20: # and l_true==True:
+      if right_z <-20 and l_true==True:
         counter_r +=1
         print('Right')
-      #   l_true =False
-      if left_z <-20: #and r_true==True:
+        r_true=True
+        l_true =False
+      if left_z <-20 and r_true==True:
         counter_l +=1
         print("left")
-        # r_true=False
+        r_true=False
+        l_true = True
       
       cv2.putText(image, f"count_r: {counter_r} count_l: {counter_l}", (30,40), cv2.FONT_HERSHEY_PLAIN, 1.6, (0,255,0), 2,cv2.LINE_AA)
 
