@@ -40,6 +40,7 @@ with mp_pose.Pose(
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     
     results = pose.process(image)
+    # Drawing all the landmak using medaipipe 
     mp_drawing.draw_landmarks(
     image,
     results.pose_landmarks,
@@ -49,9 +50,10 @@ with mp_pose.Pose(
     if results.pose_landmarks:
       # print(results.pose_landmarks.landmark[31])
       coords =np.array([np.multiply([p.x, p.y, p.z], [width, height, width]).astype(int) for p in results.pose_landmarks.landmark])
-      
+     
       # [print(c) for c in coords]
       # print(coords[31][:2])
+      # getting Z - coordinate for the values 
       right_z = coords[32][2]
       left_z = coords[31][2]
 
@@ -62,15 +64,17 @@ with mp_pose.Pose(
       cv2.circle(image, tuple(coords[31][:2]) , 6, (0,255,0), -1) # left foot index finger
       # x, y  = coords[32].ravel()
       # x1, y1  = coords[32].ravel()
+      
+      # here were are creating counting logics 
       # counting the steps 
       if right_z <-20 and l_true==True:
         counter_r +=1
-        print('Right')
+        # print('Right')
         r_true=True
         l_true =False
       if left_z <-20 and r_true==True:
         counter_l +=1
-        print("left")
+        # print("left")
         r_true=False
         l_true = True
       
